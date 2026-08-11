@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Wedding Admin
+    </title>
+
+
+    <!-- FONT -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ADMIN CSS -->
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN SCREEN
+===================================================== -->
+
+<section
+    id="loginScreen"
+    class="login-screen"
+>
+
+    <div class="login-card">
+
+        <div class="login-decoration">
+            ✿
+        </div>
+
+
+        <p class="eyebrow">
+            WEDDING ADMIN
+        </p>
+
+
+        <h1>
+            Welcome
+        </h1>
+
+
+        <p class="login-description">
+            Login untuk mengelola website
+            undangan pernikahan.
+        </p>
+
+
+        <form
+            id="loginForm"
+            class="login-form"
+        >
+
+            <label>
+                Email
+            </label>
+
+            <input
+                id="email"
+                type="email"
+                placeholder="admin@email.com"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                LOGIN
+            </button>
+
+        </form>
+
+
+        <p
+            id="loginError"
+            class="error-message"
+        ></p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section
+    id="dashboard"
+    class="dashboard hidden"
+>
+
+
+    <!-- HEADER -->
+
+    <header class="dashboard-header">
+
+        <div>
+
+            <p class="eyebrow">
+                WEDDING ADMIN
+            </p>
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                Kelola semua konten undangan
+                dari satu tempat.
+            </p>
+
+        </div>
+
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+        >
+            LOGOUT
+        </button>
+
+    </header>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================= -->
+
+    <div class="statistics">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ♡
+            </div>
+
+            <span>
+                TOTAL RSVP
+            </span>
+
+            <strong id="totalRsvp">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✓
+            </div>
+
+            <span>
+                HADIR
+            </span>
+
+            <strong id="totalHadir">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ♡
+            </div>
+
+            <span>
+                TOTAL PAX
+            </span>
+
+            <strong id="totalPax">
+                0
+            </strong>
+
+        </div>
+
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                ✉
+            </div>
+
+            <span>
+                UCAPAN
+            </span>
+
+            <strong id="totalWishes">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         GUEST MANAGEMENT
+    ================================================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    GUEST MANAGEMENT
+                </p>
+
+                <h2>
+                    Daftar Tamu
+                </h2>
+
+                <p>
+                    Tambahkan nama tamu dan
+                    generate link undangan.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            id="guestForm"
+            class="management-form guest-form"
+        >
+
+            <input
+                id="guestNameInput"
+                type="text"
+                placeholder="Contoh: Bapak Andi & Keluarga"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                + TAMBAH TAMU
+            </button>
+
+        </form>
+
+
+        <div
+            id="guestList"
+            class="management-list"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LOCATION
+    ================================================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    WEDDING LOCATION
+                </p>
+
+                <h2>
+                    Lokasi Acara
+                </h2>
+
+                <p>
+                    Masukkan lokasi akad dan resepsi.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            id="locationForm"
+            class="management-form"
+        >
+
+
+            <label>
+                Acara
+            </label>
+
+            <select
+                id="locationType"
+                required
+            >
+
+                <option value="">
+                    Pilih acara
+                </option>
+
+                <option value="Akad Nikah">
+                    Akad Nikah
+                </option>
+
+                <option value="Resepsi">
+                    Resepsi
+                </option>
+
+            </select>
+
+
+
+            <label>
+                Nama Tempat
+            </label>
+
+            <input
+                id="locationTitle"
+                type="text"
+                placeholder="Contoh: Masjid Al-Hikmah"
+                required
+            >
+
+
+
+            <label>
+                Alamat
+            </label>
+
+            <textarea
+                id="locationAddress"
+                placeholder="Alamat lengkap lokasi"
+                required
+            ></textarea>
+
+
+
+            <label>
+                Link Google Maps
+            </label>
+
+            <input
+                id="mapsUrl"
+                type="url"
+                placeholder="https://maps.google.com/..."
+                required
+            >
+
+
+
+            <label>
+                Google Maps Embed URL
+            </label>
+
+            <input
+                id="mapsEmbedUrl"
+                type="url"
+                placeholder="https://www.google.com/maps/embed?..."
+            >
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                SIMPAN LOKASI
+            </button>
+
+        </form>
+
+
+        <div
+            id="locationList"
+            class="management-list"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LOVE STORY
+    ================================================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    OUR JOURNEY
+                </p>
+
+                <h2>
+                    Love Story
+                </h2>
+
+                <p>
+                    Tambahkan perjalanan cinta
+                    kalian satu per satu.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            id="storyForm"
+            class="management-form"
+        >
+
+
+            <label>
+                Tahun / Tanggal
+            </label>
+
+            <input
+                id="storyDate"
+                type="text"
+                placeholder="Contoh: 2022"
+                required
+            >
+
+
+
+            <label>
+                Judul
+            </label>
+
+            <input
+                id="storyTitle"
+                type="text"
+                placeholder="Contoh: First Meeting"
+                required
+            >
+
+
+
+            <label>
+                Cerita
+            </label>
+
+            <textarea
+                id="storyDescription"
+                placeholder="Ceritakan momen tersebut..."
+                required
+            ></textarea>
+
+
+
+            <label>
+                URL Foto
+            </label>
+
+            <input
+                id="storyImage"
+                type="url"
+                placeholder="https://..."
+            >
+
+
+
+            <label>
+                Urutan
+            </label>
+
+            <input
+                id="storyOrder"
+                type="number"
+                value="0"
+                min="0"
+            >
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                + TAMBAH LOVE STORY
+            </button>
+
+        </form>
+
+
+        <div
+            id="storyList"
+            class="management-list"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         WEDDING GIFT
+    ================================================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    WEDDING GIFT
+                </p>
+
+                <h2>
+                    Gift Card
+                </h2>
+
+                <p>
+                    Tambahkan rekening atau QRIS
+                    untuk hadiah pernikahan.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            id="giftForm"
+            class="management-form"
+        >
+
+
+            <label>
+                Nama Bank
+            </label>
+
+            <input
+                id="bankName"
+                type="text"
+                placeholder="Contoh: BCA"
+                required
+            >
+
+
+
+            <label>
+                Nomor Rekening
+            </label>
+
+            <input
+                id="accountNumber"
+                type="text"
+                inputmode="numeric"
+                placeholder="1234567890"
+                required
+            >
+
+
+
+            <label>
+                Atas Nama
+            </label>
+
+            <input
+                id="accountName"
+                type="text"
+                placeholder="Alya & Arkan"
+                required
+            >
+
+
+
+            <label>
+                URL Logo Bank
+            </label>
+
+            <input
+                id="bankLogo"
+                type="url"
+                placeholder="https://..."
+            >
+
+
+
+            <label>
+                URL QRIS
+            </label>
+
+            <input
+                id="qrUrl"
+                type="url"
+                placeholder="https://..."
+            >
+
+
+
+            <label>
+                Urutan
+            </label>
+
+            <input
+                id="giftOrder"
+                type="number"
+                value="0"
+                min="0"
+            >
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                + TAMBAH REKENING
+            </button>
+
+        </form>
+
+
+        <div
+            id="giftList"
+            class="management-list"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         RSVP
+    ================================================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    ATTENDANCE
+                </p>
+
+                <h2>
+                    RSVP List
+                </h2>
+
+            </div>
+
+
+            <button
+                id="exportButton"
+                class="secondary-button"
+            >
+                EXPORT CSV
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Nama
+                        </th>
+
+                        <th>
+                            Kehadiran
+                        </th>
+
+                        <th>
+                            Pax
+                        </th>
+
+                        <th>
+                            Pesan
+                        </th>
+
+                        <th>
+                            Waktu
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="rsvpTable"
+                ></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         WISHES
+    ================================================= -->
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    WEDDING WISHES
+                </p>
+
+                <h2>
+                    Doa & Ucapan
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="adminWishList"
+            class="admin-wish-list"
+        ></div>
+
+    </div>
+
+
+
+</section>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="supabase.js"></script>
+
+<script src="admin.js"></script>
+
+
+</body>
+
+</html>

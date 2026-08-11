@@ -1,0 +1,2147 @@
+/* =====================================================
+   ROOT
+===================================================== */
+
+:root {
+
+    --sage:
+        #788875;
+
+    --sage-dark:
+        #4f5d4d;
+
+    --sage-light:
+        #dce6d8;
+
+    --pink:
+        #d89aa9;
+
+    --pink-light:
+        #f0d5dc;
+
+    --cream:
+        #fffaf7;
+
+    --gold:
+        #c5a46d;
+
+    --text:
+        #4c554a;
+
+    --glass:
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+
+    --glass-border:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+}
+
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(
+                255,
+                255,
+                255,
+                .7
+            ),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #cfdccc,
+            #ead6d9 50%,
+            #f2c8d2
+        );
+
+    color:
+        var(--text);
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+}
+
+
+
+/* =====================================================
+   AMBIENT LIGHT
+===================================================== */
+
+.ambient-light {
+
+    position: fixed;
+
+    width: 500px;
+
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter:
+        blur(100px);
+
+    opacity: .25;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+}
+
+
+.light-one {
+
+    top: -200px;
+
+    left: -150px;
+
+    background:
+        #d7ead0;
+
+}
+
+
+.light-two {
+
+    right: -200px;
+
+    bottom: -200px;
+
+    background:
+        #efaebe;
+
+}
+
+
+
+/* =====================================================
+   FALLING FLOWERS
+===================================================== */
+
+.falling-flowers {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 9999;
+
+}
+
+
+.falling-flower {
+
+    position: absolute;
+
+    top: -60px;
+
+    color:
+        rgba(
+            194,
+            130,
+            146,
+            .72
+        );
+
+    text-shadow:
+        0 3px 10px
+        rgba(
+            120,
+            80,
+            90,
+            .15
+        );
+
+    animation:
+        fallFlower
+        linear
+        infinite;
+
+}
+
+
+@keyframes fallFlower {
+
+    0% {
+
+        transform:
+            translate3d(
+                0,
+                -80px,
+                0
+            )
+            rotate(0deg);
+
+        opacity: 0;
+
+    }
+
+
+    10% {
+
+        opacity: .8;
+
+    }
+
+
+    50% {
+
+        margin-left:
+            45px;
+
+    }
+
+
+    100% {
+
+        transform:
+            translate3d(
+                -30px,
+                110vh,
+                0
+            )
+            rotate(
+                360deg
+            );
+
+        opacity: .1;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   GLASS FRAME
+===================================================== */
+
+.glass-frame {
+
+    position: relative;
+
+    width:
+        min(
+            1120px,
+            92vw
+        );
+
+    min-height:
+        80vh;
+
+    padding:
+        clamp(
+            45px,
+            7vw,
+            90px
+        );
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    overflow:
+        hidden;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                255,
+                255,
+                .38
+            ),
+            rgba(
+                255,
+                255,
+                255,
+                .12
+            )
+        );
+
+    border:
+        1px solid
+        var(--glass-border);
+
+    border-radius:
+        35px;
+
+    backdrop-filter:
+        blur(22px);
+
+    -webkit-backdrop-filter:
+        blur(22px);
+
+    box-shadow:
+
+        0 25px 80px
+        rgba(
+            73,
+            78,
+            68,
+            .16
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            .7
+        );
+
+}
+
+
+
+/* =====================================================
+   MOVING GLOW BORDER
+===================================================== */
+
+.glass-frame::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    border-radius:
+        37px;
+
+    padding: 2px;
+
+    background:
+
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(
+                255,
+                255,
+                255,
+                .9
+            ),
+            rgba(
+                216,
+                154,
+                169,
+                .8
+            ),
+            transparent,
+            rgba(
+                197,
+                164,
+                109,
+                .7
+            ),
+            transparent
+        );
+
+    background-size:
+        300% 300%;
+
+    animation:
+        borderGlow
+        8s
+        linear
+        infinite;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0)
+        content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:
+        xor;
+
+    mask-composite:
+        exclude;
+
+    pointer-events:
+        none;
+
+}
+
+
+@keyframes borderGlow {
+
+    0% {
+
+        background-position:
+            0% 50%;
+
+    }
+
+    50% {
+
+        background-position:
+            100% 50%;
+
+    }
+
+    100% {
+
+        background-position:
+            0% 50%;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   FLOWER CORNERS
+===================================================== */
+
+.corner-flower,
+.decorative-flower {
+
+    position: absolute;
+
+    font-family:
+        serif;
+
+    color:
+        rgba(
+            190,
+            126,
+            144,
+            .65
+        );
+
+    text-shadow:
+
+        0 0 12px
+        rgba(
+            214,
+            155,
+            170,
+            .5
+        ),
+
+        0 0 25px
+        rgba(
+            214,
+            155,
+            170,
+            .2
+        );
+
+    animation:
+        flowerPulse
+        4s
+        ease-in-out
+        infinite;
+
+    pointer-events:
+        none;
+
+}
+
+
+.flower-top-left {
+
+    top: 25px;
+
+    left: 30px;
+
+    font-size: 45px;
+
+}
+
+
+.flower-top-right {
+
+    top: 25px;
+
+    right: 30px;
+
+    font-size: 35px;
+
+}
+
+
+.flower-bottom-left {
+
+    bottom: 25px;
+
+    left: 30px;
+
+    font-size: 30px;
+
+}
+
+
+.flower-bottom-right {
+
+    bottom: 25px;
+
+    right: 30px;
+
+    font-size: 48px;
+
+}
+
+
+.flower-a {
+
+    top: 12%;
+
+    left: 5%;
+
+    font-size: 65px;
+
+}
+
+
+.flower-b {
+
+    top: 20%;
+
+    right: 6%;
+
+    font-size: 45px;
+
+}
+
+
+.flower-c {
+
+    bottom: 12%;
+
+    left: 8%;
+
+    font-size: 35px;
+
+}
+
+
+@keyframes flowerPulse {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(-8deg)
+            scale(1);
+
+        opacity: .5;
+
+    }
+
+    50% {
+
+        transform:
+            rotate(8deg)
+            scale(1.12);
+
+        opacity: .9;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   OPENING
+===================================================== */
+
+.opening-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #d7e1d3,
+            #e9d2d8,
+            #f0c7d1
+        );
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+
+}
+
+
+.opening-screen.hide {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+}
+
+
+.opening-frame {
+
+    min-height:
+        85vh;
+
+    text-align:
+        center;
+
+}
+
+
+.opening-content {
+
+    position:
+        relative;
+
+    z-index: 2;
+
+}
+
+
+.arabic {
+
+    font-family:
+        "Amiri",
+        serif;
+
+    font-size:
+        24px;
+
+    color:
+        #737c6e;
+
+    margin-bottom:
+        25px;
+
+}
+
+
+.opening-label,
+.eyebrow {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        5px;
+
+    color:
+        #77806f;
+
+}
+
+
+.opening-content h1 {
+
+    margin-top:
+        30px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            80px,
+            14vw,
+            150px
+        );
+
+    line-height:
+        .7;
+
+    font-weight:
+        500;
+
+    color:
+        #52604f;
+
+}
+
+
+.opening-content h1 span {
+
+    display:
+        block;
+
+    font-size:
+        .35em;
+
+    margin:
+        40px 0;
+
+    color:
+        var(--pink);
+
+    font-style:
+        italic;
+
+}
+
+
+.gold-line {
+
+    width:
+        80px;
+
+    height:
+        1px;
+
+    margin:
+        30px auto;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+
+}
+
+
+.opening-date {
+
+    letter-spacing:
+        6px;
+
+    font-size:
+        12px;
+
+}
+
+
+.guest-label {
+
+    margin-top:
+        55px;
+
+    font-size:
+        11px;
+
+}
+
+
+#guestName {
+
+    margin:
+        10px 0 25px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        34px;
+
+    font-weight:
+        500;
+
+}
+
+
+.glow-button {
+
+    position:
+        relative;
+
+    padding:
+        15px 35px;
+
+    border:
+        1px solid
+        rgba(
+            91,
+            104,
+            88,
+            .45
+        );
+
+    border-radius:
+        50px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .25
+        );
+
+    color:
+        #52604f;
+
+    letter-spacing:
+        2px;
+
+    cursor:
+        pointer;
+
+    overflow:
+        hidden;
+
+    transition:
+        .4s ease;
+
+}
+
+
+.glow-button:hover {
+
+    color:
+        white;
+
+    background:
+        var(--sage);
+
+    box-shadow:
+        0 0 25px
+        rgba(
+            120,
+            145,
+            112,
+            .45
+        );
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+
+/* =====================================================
+   MAIN SLIDES
+===================================================== */
+
+.main-content {
+
+    display:
+        none;
+
+}
+
+
+.main-content.show {
+
+    display:
+        block;
+
+}
+
+
+.slide {
+
+    min-height:
+        100vh;
+
+    padding:
+        8vh 0;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    position:
+        relative;
+
+}
+
+
+.slide-content {
+
+    width:
+        min(
+            950px,
+            100%
+        );
+
+    text-align:
+        center;
+
+    opacity:
+        0;
+
+    transform:
+        translateY(50px)
+        scale(.97);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+
+}
+
+
+.slide.visible
+.slide-content {
+
+    opacity:
+        1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+.slide h2 {
+
+    margin:
+        15px 0 30px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            50px,
+            8vw,
+            90px
+        );
+
+    font-weight:
+        500;
+
+    color:
+        #52604f;
+
+}
+
+
+.couple-title {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            80px,
+            15vw,
+            160px
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        .75;
+
+    color:
+        #53604f;
+
+}
+
+
+.couple-title span {
+
+    display:
+        block;
+
+    font-size:
+        .35em;
+
+    color:
+        var(--pink);
+
+    margin:
+        35px 0;
+
+}
+
+
+.date-large {
+
+    margin-top:
+        50px;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        6px;
+
+}
+
+
+.quote {
+
+    max-width:
+        650px;
+
+    margin:
+        35px auto 10px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        25px;
+
+    line-height:
+        1.6;
+
+}
+
+
+.quote-source {
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+.event-date-text {
+
+    margin-bottom:
+        50px;
+
+}
+
+
+.countdown {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        15px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+.count-box {
+
+    min-width:
+        120px;
+
+    padding:
+        25px 15px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .45
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .2
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    border-radius:
+        15px;
+
+}
+
+
+.count-box span {
+
+    display:
+        block;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        50px;
+
+    color:
+        #596554;
+
+}
+
+
+.count-box small {
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        3px;
+
+}
+
+
+
+/* =====================================================
+   COUPLE
+===================================================== */
+
+.couple-container {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        45px;
+
+}
+
+
+.person {
+
+    width:
+        280px;
+
+}
+
+
+.photo-frame {
+
+    width:
+        240px;
+
+    height:
+        330px;
+
+    margin:
+        auto;
+
+    padding:
+        8px;
+
+    border:
+        1px solid
+        rgba(
+            197,
+            164,
+            109,
+            .6
+        );
+
+    border-radius:
+        130px 130px 20px 20px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .25
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(
+            197,
+            164,
+            109,
+            .18
+        );
+
+}
+
+
+.photo-frame img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    border-radius:
+        120px 120px 15px 15px;
+
+}
+
+
+.role {
+
+    margin-top:
+        25px;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        4px;
+
+    color:
+        #7c8575;
+
+}
+
+
+.person h3 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        45px;
+
+    font-weight:
+        500;
+
+    margin:
+        5px 0;
+
+}
+
+
+.person p:not(.role) {
+
+    font-size:
+        11px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.ampersand {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        70px;
+
+    color:
+        var(--pink);
+
+}
+
+
+
+/* =====================================================
+   EVENT
+===================================================== */
+
+.event-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    gap:
+        25px;
+
+}
+
+
+.event-card {
+
+    padding:
+        45px 30px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .5
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .18
+        );
+
+    border-radius:
+        25px;
+
+    backdrop-filter:
+        blur(12px);
+
+    transition:
+        .5s ease;
+
+}
+
+
+.event-card:hover {
+
+    transform:
+        translateY(-10px);
+
+    box-shadow:
+        0 20px 45px
+        rgba(
+            70,
+            80,
+            70,
+            .15
+        );
+
+}
+
+
+.event-label {
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        4px;
+
+}
+
+
+.event-icon {
+
+    margin:
+        20px;
+
+    color:
+        var(--gold);
+
+    font-size:
+        25px;
+
+}
+
+
+.event-card h3 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        42px;
+
+    font-weight:
+        500;
+
+}
+
+
+.event-card strong {
+
+    display:
+        block;
+
+    margin:
+        10px 0;
+
+}
+
+
+.mini-line {
+
+    width:
+        50px;
+
+    height:
+        1px;
+
+    margin:
+        20px auto;
+
+    background:
+        var(--gold);
+
+}
+
+
+.event-card p {
+
+    font-size:
+        11px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.location-button {
+
+    display:
+        inline-block;
+
+    margin-top:
+        25px;
+
+    padding:
+        11px 22px;
+
+    border:
+        1px solid
+        rgba(
+            80,
+            90,
+            75,
+            .35
+        );
+
+    border-radius:
+        50px;
+
+    text-decoration:
+        none;
+
+    color:
+        var(--sage-dark);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        2px;
+
+}
+
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+.gallery-grid {
+
+    max-width:
+        850px;
+
+    margin:
+        50px auto 0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    gap:
+        15px;
+
+}
+
+
+.gallery-item {
+
+    height:
+        300px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        20px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .5
+        );
+
+}
+
+
+.gallery-item.tall {
+
+    grid-row:
+        span 2;
+
+    height:
+        615px;
+
+}
+
+
+.gallery-item img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    transition:
+        transform
+        .8s ease;
+
+}
+
+
+.gallery-item:hover img {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+
+/* =====================================================
+   FORMS
+===================================================== */
+
+.section-description {
+
+    max-width:
+        550px;
+
+    margin:
+        auto;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.form {
+
+    width:
+        min(
+            500px,
+            100%
+        );
+
+    margin:
+        40px auto 0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        15px;
+
+}
+
+
+.form input,
+.form select,
+.form textarea {
+
+    width:
+        100%;
+
+    padding:
+        16px;
+
+    border:
+        1px solid
+        rgba(
+            100,
+            110,
+            95,
+            .2
+        );
+
+    border-radius:
+        12px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .3
+        );
+
+    backdrop-filter:
+        blur(8px);
+
+    outline:
+        none;
+
+    font-family:
+        "Montserrat",
+        sans-serif;
+
+    color:
+        var(--text);
+
+}
+
+
+.form textarea {
+
+    min-height:
+        120px;
+
+    resize:
+        vertical;
+
+}
+
+
+.submit-button {
+
+    padding:
+        16px;
+
+    border:
+        none;
+
+    border-radius:
+        50px;
+
+    background:
+        var(--sage-dark);
+
+    color:
+        white;
+
+    letter-spacing:
+        2px;
+
+    font-size:
+        10px;
+
+    cursor:
+        pointer;
+
+    transition:
+        .4s ease;
+
+}
+
+
+.submit-button:hover {
+
+    background:
+        var(--pink);
+
+    box-shadow:
+        0 0 25px
+        rgba(
+            216,
+            154,
+            169,
+            .35
+        );
+
+}
+
+
+
+/* =====================================================
+   WISHES
+===================================================== */
+
+.wish-list {
+
+    width:
+        min(
+            650px,
+            100%
+        );
+
+    max-height:
+        400px;
+
+    overflow-y:
+        auto;
+
+    margin:
+        50px auto 0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        12px;
+
+}
+
+
+.wish-item {
+
+    text-align:
+        left;
+
+    padding:
+        20px;
+
+    border-left:
+        2px solid
+        var(--pink);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .25
+        );
+
+    backdrop-filter:
+        blur(8px);
+
+    animation:
+        wishAppear
+        .6s
+        ease;
+
+}
+
+
+.wish-item strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.wish-item p {
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+
+}
+
+
+@keyframes wishAppear {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CLOSING
+===================================================== */
+
+.large-arabic {
+
+    font-size:
+        30px;
+
+    line-height:
+        1.8;
+
+}
+
+
+.closing-text {
+
+    max-width:
+        600px;
+
+    margin:
+        30px auto;
+
+    line-height:
+        1.9;
+
+    font-size:
+        12px;
+
+}
+
+
+.closing-love {
+
+    margin-top:
+        50px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        25px;
+
+}
+
+
+.closing-slide h3 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        50px;
+
+    font-weight:
+        500;
+
+}
+
+
+
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+
+.music-button {
+
+    position:
+        fixed;
+
+    right:
+        25px;
+
+    bottom:
+        25px;
+
+    z-index:
+        10001;
+
+    width:
+        50px;
+
+    height:
+        50px;
+
+    border-radius:
+        50%;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .6
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .3
+        );
+
+    backdrop-filter:
+        blur(10px);
+
+    color:
+        var(--sage-dark);
+
+    cursor:
+        pointer;
+
+    transition:
+        .4s ease;
+
+}
+
+
+.music-button.playing {
+
+    animation:
+        musicRotate
+        3s
+        linear
+        infinite;
+
+    box-shadow:
+        0 0 25px
+        rgba(
+            216,
+            154,
+            169,
+            .5
+        );
+
+}
+
+
+@keyframes musicRotate {
+
+    from {
+
+        transform:
+            rotate(0);
+
+    }
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (
+    max-width: 700px
+) {
+
+
+    .glass-frame {
+
+        width:
+            92vw;
+
+        min-height:
+            85vh;
+
+        padding:
+            45px 20px;
+
+        border-radius:
+            25px;
+
+    }
+
+
+    .couple-container {
+
+        flex-direction:
+            column;
+
+        gap:
+            25px;
+
+    }
+
+
+    .ampersand {
+
+        font-size:
+            45px;
+
+    }
+
+
+    .event-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .gallery-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .gallery-item.tall {
+
+        grid-row:
+            auto;
+
+        height:
+            350px;
+
+    }
+
+
+    .gallery-item {
+
+        height:
+            280px;
+
+    }
+
+
+    .count-box {
+
+        min-width:
+            90px;
+
+        padding:
+            20px 8px;
+
+    }
+
+
+    .count-box span {
+
+        font-size:
+            35px;
+
+    }
+
+
+    .flower-a {
+
+        font-size:
+            40px;
+
+    }
+
+
+    .flower-b {
+
+        font-size:
+            30px;
+
+    }
+
+}
